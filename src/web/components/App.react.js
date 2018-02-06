@@ -10,7 +10,9 @@ const store = configureStore()
 
 import TodoApp from '../containers/TodoApp.react'
 
-export default React.createClass({
+import createReactClass from 'create-react-class'
+
+export default createReactClass({
   render() {
     return (
       <Provider store={store} >

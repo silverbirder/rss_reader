@@ -1,5 +1,5 @@
 var path = require('path')
-
+var webpack = require('webpack')
 module.exports = {
   entry: [
     './src/web/app.js',
@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve('./public'),
     publicPath: '/',
   },
+  target: 'web',
   module: {
     loaders: [
       {
