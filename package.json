@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "electron": "electron index.electron.js"
+    "electron": "node_modules/electron-prebuilt/cli.js index.electron.js"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -14,7 +14,6 @@
     "babel-preset-react": "^6.24.1",
     "create-react-class": "^15.6.3",
     "electron-prebuilt": "^1.4.13",
-    "gulp": "^3.9.1",
     "path": "^0.12.7",
     "react": "16.2.0",
     "react-dom": "^16.2.0",
