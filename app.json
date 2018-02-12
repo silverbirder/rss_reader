@@ -1,4 +1,11 @@
 {
-  "name": "rss_reader",
-  "displayName": "rss_reader"
+  "expo": {
+    "sdkVersion": "25.0.0",
+    "name":"my app",
+    "icon":"./mypic.jpg",
+    "version":"1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.mycompany.myappname"
+    }
+  }
 }

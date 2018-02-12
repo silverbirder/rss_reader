@@ -46,6 +46,7 @@ export default class extends Component {
         <ListView
           dataSource={this.state.ds}
           renderRow={(rowData) => <Text>{ rowData.text }</Text>}
+          enableEmptySections
         />
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
