@@ -2,7 +2,11 @@
   "expo": {
     "sdkVersion": "25.0.0",
     "name":"my app",
-    "icon":"./mypic.jpg",
+    "icon":"./assets/icons/icons.png",
+    "loading": {
+      "icon": "./assets/icons/icons.png",
+      "hideExponentText": false
+    },
     "version":"1.0.0",
     "ios": {
       "bundleIdentifier": "com.mycompany.myappname"
