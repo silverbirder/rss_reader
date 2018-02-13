@@ -19,3 +19,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# electron
+rss_reader-darwin-x64/
+rss_reader-win32-x64/
