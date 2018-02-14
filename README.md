@@ -38,3 +38,7 @@ git push heroku master
 # ↓
 # Procfile → npm run web
 ```
+# web link
+https://rss-reader-dev.herokuapp.com
+# expo link
+https://expo.io/@silverbirder/my-app
