@@ -8,13 +8,13 @@ import configureStore from './src/store/configureStore'
 
 const store = configureStore()
 
-import TodoApp from './src/native/containers/TodoApp.react'
+import RssReader from './src/native/containers/rss_reader.react'
 
 export default class extends Component {
   render() {
     return (
       <Provider store={store} >
-        <TodoApp />
+        <RssReader />
       </Provider>
     )
   }

@@ -8,7 +8,7 @@ import configureStore from '../../store/configureStore'
 
 const store = configureStore()
 
-import TodoApp from '../containers/TodoApp.react'
+import RssReader from '../containers/rss_reader.react'
 
 import createReactClass from 'create-react-class'
 
@@ -16,7 +16,7 @@ export default createReactClass({
   render() {
     return (
       <Provider store={store} >
-        <TodoApp />
+        <RssReader />
       </Provider>
     )
   }
