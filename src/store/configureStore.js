@@ -5,5 +5,8 @@ import {
 import reducers from './reducers'
 
 export default () => {
-  return createStore(reducers)
+  return createStore(
+    reducers,
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
 }
