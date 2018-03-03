@@ -1,63 +1,124 @@
-import React, { Component } from 'react';
-
+import React, { Component,PropTypes } from 'react';
+import createReactClass from 'create-react-class';
 import {
   StyleSheet,
-  View,
   Text,
-  TextInput,
+  View,
   ListView,
+  Image,
+  NavigatorIOS,
+  TouchableWithoutFeedback,
+  WebView,
 } from 'react-native'
+import { fetchQiita } from '../../actions';
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 38
-  }
-})
+const QIITA_URL = "https://qiita.com/api/v2/tags/reactjs/items";
 
-export default class extends Component {
+export const ReactQiitaList = class extends Component {
   constructor(props) {
     super(props)
-
     let ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
-
     this.state = {
-      ds: ds.cloneWithRows(props.todos || []),
-      addTodoText: '',
+      ds: ds.cloneWithRows(props.items || []),
+      loaded: props.loaded
     }
   }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.todos !== this.props.todos) {
+  componentWillReceiveProps(nextProps){
+    if (nextProps.items !== this.props.items) {
       this.setState({
-        ds: this.state.ds.cloneWithRows(nextProps.todos || [])
+        ds: this.state.ds.cloneWithRows(nextProps.items || []),
+        loaded:nextProps.loaded
       })
     }
   }
-
+  componentDidMount() {
+    this.props.fetchQiita(QIITA_URL);
+  }
   render() {
-    const {
-      addTodo,
-    } = this.props
-
-    return (
-      <View style={styles.container}>
+    if(!this.state.loaded) {
+      return (
+        <View><Text>Loading ...</Text></View>
+      )
+    } else {
+      return (
         <ListView
           dataSource={this.state.ds}
-          renderRow={(rowData) => <Text>{ rowData.text }</Text>}
-          enableEmptySections
-        />
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={addTodoText => this.setState({addTodoText})}
-          value={this.state.addTodoText}
-        />
-        <Text onPress={() => {
-          addTodo(this.state.addTodoText)
-          this.setState({addTodoText: ''})
-        }}>ADD</Text>
+          renderRow={this.renderItem}
+          style={styles.listView}/>
+      )
+    }
+  }
+  renderItem(item, sectionID, rowID) {
+    return (
+      <TouchableWithoutFeedback>
+      <View style={styles.container}>
+        <Image
+          source={{uri: item.user.profile_image_url}}
+          style={styles.thumbnail}/>
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.name}>{item.user.id}</Text>
+        </View>
       </View>
+      </TouchableWithoutFeedback>
+    );
+  }
+};
+// 記事閲覧用のWebView
+const ReactQiitaItemView = createReactClass({
+  render: function() {
+    return (
+      <WebView
+        url={this.props.url}/>
     )
+  }
+});
+
+// 各種デザイン要素
+const styles = StyleSheet.create({
+  navigator: {
+    flex: 1
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  rightContainer: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 15,
+    margin: 8,
+    textAlign: 'left',
+  },
+  name: {
+    fontSize: 12,
+    margin: 8,
+    textAlign: 'left',
+  },
+  thumbnail: {
+    width: 80,
+    height: 80,
+    margin: 2,
+  },
+  listView: {
+    backgroundColor: '#FFFFFF',
+  },
+});
+
+export default class extends Component {
+  render() {
+    return (
+      <ReactQiitaList 
+      items={this.props.items}
+      loaded={this.props.loaded}
+      fetchQiita={this.props.fetchQiita}
+      ></ReactQiitaList>
+    );
   }
 }

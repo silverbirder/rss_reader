@@ -1,17 +1,18 @@
 import { connect } from 'react-redux'
 import {
-  addTodo,
+  fetchQiita,
 } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos,
+    items: state.fetchQiita.items,
+    loaded: state.fetchQiita.loaded,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTodo: text => dispatch(addTodo(text))
+     fetchQiita: url => dispatch(fetchQiita(url))
   }
 }
 
